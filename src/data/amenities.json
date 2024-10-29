@@ -1,5 +1,4 @@
-{
-  "amenities": [
+[
     {
       "id": "l4567890-12gh-ijkl-1234-56789abcdef0",
       "name": "Wifi"
@@ -40,5 +39,4 @@
       "id": "u3456789-01rs-tuvw-01cd-ef0123456789",
       "name": "Free Parking"
     }
-  ]
-}
+]

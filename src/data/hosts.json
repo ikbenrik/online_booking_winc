@@ -1,5 +1,4 @@
-{
-  "hosts": [
+[
     {
       "id": "f1234567-89ab-cdef-0123-456789abcdef",
       "username": "johnDoe",
@@ -50,5 +49,4 @@
       "profilePicture": "https://example.com/images/paulgreen.jpg",
       "aboutMe": "Engineer by profession, passionate about history. Stay in my vintage-themed home and relive the past."
     }
-  ]
-}
+]

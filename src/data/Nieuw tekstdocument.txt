@@ -44,4 +44,4 @@
       "phoneNumber": "123-456-7894",
       "profilePicture": "https://example.com/smiller-profile-pic.jpg"
     }
-  ]
+]

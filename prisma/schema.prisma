@@ -1,0 +1,91 @@
+generator client {
+  provider     = "prisma-client-js"
+  relationMode = "prisma"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  relationMode      = "prisma"
+}
+
+model User {
+  id       String     @id @default(uuid())
+  username String    @unique
+  email    String    
+  name     String?
+  password String?
+  phoneNumber String?
+  profilePicture String
+  bookings Booking[]
+
+  Review Review[]
+}
+
+model Host {
+  id       String     @id @default(uuid())
+  username String
+  password String     
+  email    String    
+  phoneNumber String 
+  name     String?    
+  profilePicture String
+  aboutMe  String
+  listings Property[]
+}
+
+model Property {
+  id            String      @id @default(uuid())
+  title         String
+  description   String
+  location      String
+  pricePerNight Decimal   @db.Decimal(10, 2)
+  bedroomCount  Int
+  bathRoomCount Int
+  maxGuestCount Int
+  hostId        String
+  rating        Int
+  host          Host      @relation(fields: [hostId], references: [id])
+  amenities     Amenity[] @relation("PropertyAmenities")
+  bookings      Booking[]
+  reviews       Review[]
+}
+
+model Amenity {
+  id         String       @id @default(uuid())
+  name       String
+  properties Property[] @relation("PropertyAmenities")
+}
+
+model Booking {
+  id         String    @id @default(uuid()) // UUID for booking ID
+  checkin    DateTime?
+  checkout   DateTime?
+  userId     String    // Change to String to match `Users.id`
+  propertyId String    // Change to String to match `Property.id`
+  numberOfGuests  Int
+  totalPrice  Decimal   @db.Decimal(10, 2)
+  bookingStatus String
+  user       User     @relation(fields: [userId], references: [id]) // Relation to Users
+  property   Property  @relation(fields: [propertyId], references: [id]) // Relation to Property
+}
+
+model Review {
+  id         String     @id @default(uuid())
+  userId     String
+  rating     Int
+  comment    String
+  propertyId String
+  user       User     @relation(fields: [userId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
+}
+
+model PropertyAmenities {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_PropertyAmenities_AB_unique")
+  @@index([B], map: "_PropertyAmenities_B_index")
+  @@map("_PropertyAmenities")
+}

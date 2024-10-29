@@ -1,5 +1,4 @@
-{
-  "reviews": [
+[
     {
       "id": "g7890123-45cd-ef01-2345-6789abcdef01",
       "userId": "a1234567-89ab-cdef-0123-456789abcdef",
@@ -35,5 +34,4 @@
       "rating": 5,
       "comment": "A perfect stay! Can't wait to come back."
     }
-  ]
-}
+]
